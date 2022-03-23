@@ -22,20 +22,28 @@
         <div class="container">
           <span class="navbar-brand mb-0 h1 text-primary">Fav Albums</span>
           <div>
-            <a href="/registration" class="link-primary">Register</a> |
-            <a href="/login" class="link-primary">Login</a>
+            <a href="/registration" class="link-primary">Post favorite album</a>
+            |
+            <a href="/login" class="link-primary">Logout</a>
           </div>
         </div>
       </nav>
       <main>
         <div class="intro">
-          <h2 class="text-danger">Fav Albums</h2>
-          <h3>A place to share your favorite album collections!</h3>
+          <h1>Welcome ((user.first_name}}!</h1>
         </div>
-        <img
-          class="record_pic"
-          src="{{ url_for('static', filename='img/record.jpg') }}"
-        />
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">{{albums.name}}</h1>
+            <p class="card-text">Network: {{albums.artist}}</p>
+            <p class="card-text">
+              Release Date: {{albums.release_date.strftime('%Y-%m-%d')}}
+            </p>
+            <p class="card-text">Favorit Tracks: {{albums.favorite_tracks}}</p>
+            <br />
+            <p>Total likes: ????</p>
+          </div>
+        </div>
       </main>
     </div>
   </body>
