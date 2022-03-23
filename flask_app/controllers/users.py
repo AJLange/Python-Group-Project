@@ -1,7 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import app
 from flask_app.models.user import User
-from flask_app.models.show import Show
+from flask_app.models.album import Album
 from flask import render_template,redirect,request, session, flash
 from flask_bcrypt import Bcrypt
 
@@ -9,9 +9,13 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')        
 def index():
-    return render_template('login.html')
+    return render_template('homepage.html')
 
-@app.route('/register' , methods=["POST"])        
+@app.route('/register')        
+def registration():
+    return render_template('register.html')
+
+@app.route('/doregister' , methods=["POST"])        
 def register():
     print(request.form)
     if not User.validate_reg(request.form):
