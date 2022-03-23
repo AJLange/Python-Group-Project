@@ -11,11 +11,11 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('homepage.html')
 
-@app.route('/register')        
+@app.route('/registration')        
 def registration():
     return render_template('register.html')
 
-@app.route('/doregister' , methods=["POST"])        
+@app.route('/register' , methods=["POST"])        
 def register():
     print(request.form)
     if not User.validate_reg(request.form):
@@ -33,7 +33,22 @@ def register():
         session['user_id'] = user_id
     return redirect('/dashboard')
 
+
 @app.route('/login' , methods=["POST"])        
+def login_page():
+    print(request.form)
+    user = User.get_by_email(request.form)
+    if not user:
+        flash("Invalid Email", "login")
+        return redirect('/')
+    if not bcrypt.check_password_hash(user.password, request.form['password']):
+        flash("Wrong password!", "login")
+        return redirect('/')
+    else: #no errors
+        session['user_id'] = user.id
+    return redirect('/dashboard')
+
+@app.route('/loggin' , methods=["POST"])        
 def login():
     print(request.form)
     user = User.get_by_email(request.form)
@@ -54,7 +69,7 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
-    return render_template('dashboard.html', user=User.get_by_id(data), shows=Show.get_all(), liked_shows = Show.get_liked_shows(data), unliked_shows = Show.get_unliked_shows(data))
+    return render_template('dashboard.html', user=User.get_by_id(data), albums=Album.get_all(), liked_albums = Album.get_liked_albums(data), unliked_albums = Album.get_unliked_albums(data))
 
 @app.route('/logout')        
 def logout():
