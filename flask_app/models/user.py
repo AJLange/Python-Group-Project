@@ -7,7 +7,7 @@ import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class User:
-    db = ("tv")
+    db = ("fav_albums")
     def __init__(self, data):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -16,7 +16,7 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.liked_shows = []
+        self.liked_albums = []
         
 
     @classmethod
@@ -36,7 +36,7 @@ class User:
 
     @classmethod
     def get_owner(cls,data):
-        query = "SELECT * FROM users LEFT JOIN shows on users.id = shows.user_id WHERE shows.id = %(id)s;"
+        query = "SELECT * FROM users LEFT JOIN albums on users.id = albums.user_id WHERE albums.id = %(id)s;"
         result = connectToMySQL(cls.db).query_db(query,data)
         return cls(result[0])
 
