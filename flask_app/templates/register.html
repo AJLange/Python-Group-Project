@@ -22,20 +22,121 @@
         <div class="container">
           <span class="navbar-brand mb-0 h1">Fav Albums</span>
           <div>
-            <a href="/register" class="link-primary">Register</a> |
-            <a href="/login" class="link-primary">Login</a>
+            <a href="/login" class="link-primary">Already Registered? Log In</a>
           </div>
         </div>
       </nav>
       <main>
         <div class="intro">
-          <h2 class="text-primary">Fav Albums</h2>
+          <h2 class="text-primary">Create Account</h2>
         </div>
-        <img
-          class="record_pic"
-          src="{{ url_for('static', filename='img/record.jpg') }}"
-        />
       </main>
+      <section class="vh-80 gradient-custom text-dark">
+        <div class="container py-5 h-80">
+          <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+              <div
+                class="card shadow-2-strong card-registration"
+                style="border-radius: 15px"
+              >
+                <div class="card-body p-4 p-md-5">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">New Account</h3>
+                  {% with messages = get_flashed_messages() %}
+                  <!-- declare a variable called messages -->
+                  {% if messages %}
+                  <!-- check if there are any messages -->
+                  {% for message in messages %}
+                  <!-- loop through the messages -->
+                  <p class="2.5rem">{{message}}</p>
+                  <!-- display each message in a paragraph tag -->
+                  {% endfor %}
+                  <!--  -->
+                  {% endif %}
+                  <!--  -->
+                  {% endwith %}
+                  <form action="/register" method="POST">
+                    <!-- **********************First and Last Name-->
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            name="first_name"
+                            class="form-control form-control-lg"
+                          />
+                          <label class="form-label" for="first_name"
+                            >First Name</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <input
+                            type="text"
+                            name="last_name"
+                            class="form-control form-control-lg"
+                          />
+                          <label class="form-label" for="last_name"
+                            >Last Name</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <!-- ********************Email-->
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+                        <div class="form-outline">
+                          <input
+                            type="email"
+                            name="email"
+                            class="form-control form-control-lg"
+                          />
+                          <label class="form-label" for="email">Email</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- **********************Password-->
+                    <div class="row">
+                      <div class="col-md-6 mb-4 d-flex align-items-center">
+                        <div class="form-outline datepicker w-100">
+                          <input
+                            type="password"
+                            class="form-control form-control-lg"
+                            name="password"
+                          />
+                          <label for="password" class="form-label"
+                            >Password</label
+                          >
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4 d-flex align-items-center">
+                        <div class="form-outline datepicker w-100">
+                          <input
+                            type="password"
+                            class="form-control form-control-lg"
+                            name="con_pass"
+                          />
+                          <label for="con_pass" class="form-label"
+                            >Confirm Password</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <!-- **********************Sumbmit-->
+                    <div class="mt-4 pt-2">
+                      <input
+                        class="btn btn-success btn-lg"
+                        type="submit"
+                        value="Register"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </body>
 </html>
