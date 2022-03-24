@@ -9,7 +9,7 @@
     <title>Favorite Albums</title>
 </head>
 <body>
-    <div class="container-md">
+    <div class="container-md record-pic">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="#">
@@ -26,8 +26,8 @@
             <div class="intro">
                 <h2 class="title mt-5 text-align-center">AlbumStash</h2>
                 <p>A place to share and find your favorite albums!</p>
+                <img class="record_pic" src="{{ url_for('static', filename='img/record.jpg') }}">
             </div>
-            <img class="record_pic" src="{{ url_for('static', filename='img/record.jpg') }}">
         </main>
     </div>
 </body>
