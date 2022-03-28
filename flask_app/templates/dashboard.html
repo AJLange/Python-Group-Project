@@ -20,11 +20,14 @@
     <div class="container-md">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <span class="navbar-brand mb-0 h1 text-primary">Fav Albums</span>
+          <a class="navbar-brand" href="/">
+            <img class="music" src="{{ url_for('static', filename='img/music.jpg') }}">
+            <span class="navbar-brand mb-0 h1">AlbumStash</span>
+        </a>
           <div>
             <a href="/registration" class="link-primary">Post favorite album</a>
             |
-            <a href="/login" class="link-primary">Logout</a>
+            <a href="/logout" class="link-primary">Logout</a>
           </div>
         </div>
       </nav>
