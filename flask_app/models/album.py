@@ -22,3 +22,21 @@ class Album:
         for a in results:
             albums.append(cls(a))
         return albums
+
+    @classmethod
+    def get_liked_albums(cls):
+        query = "SELECT * FROM albums;"
+        results = connectToMySQL(Album.db).query_db(query)
+        albums = []
+        for a in results:
+            albums.append(cls(a))
+        return albums
+
+    @classmethod
+    def get_unliked_albums(cls):
+        query = "SELECT * FROM albums;"
+        results = connectToMySQL(Album.db).query_db(query)
+        albums = []
+        for a in results:
+            albums.append(cls(a))
+        return albums

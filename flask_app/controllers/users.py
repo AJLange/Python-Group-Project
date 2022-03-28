@@ -36,16 +36,7 @@ def register():
 
 @app.route('/user_login')        
 def login_page():
-    print(request.form)
-    user = User.get_by_email(request.form)
-    if not user:
-        flash("Invalid Email", "login")
-        return redirect('/')
-    if not bcrypt.check_password_hash(user.password, request.form['password']):
-        flash("Wrong password!", "login")
-        return redirect('/')
-    else: #no errors
-        session['user_id'] = user.id
+    
     return render_template('login.html')
 
 
