@@ -29,7 +29,7 @@ def add_album():
 @app.route('/album/<int:id>')
 def display_album(id):
     Album.get_liked_albums({"id": id})
-    return render_template("dashboard.html", album = Album.read_album_with_likes({"id": id}))
+    return render_template("dashboard.html", album = Album.get_liked_albums({"id": id}))
 
 @app.route("/albums/like/<int:id>")
 def like_album(id):
