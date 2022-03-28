@@ -34,7 +34,7 @@ def register():
     return redirect('/dashboard')
 
 
-@app.route('/login' , methods=["POST"])        
+@app.route('/user_login')        
 def login_page():
     print(request.form)
     user = User.get_by_email(request.form)
@@ -46,9 +46,10 @@ def login_page():
         return redirect('/')
     else: #no errors
         session['user_id'] = user.id
-    return redirect('/dashboard')
+    return render_template('login.html')
 
-@app.route('/loggin' , methods=["POST"])        
+
+@app.route('/login' , methods=["POST"])        
 def login():
     print(request.form)
     user = User.get_by_email(request.form)
