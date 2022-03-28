@@ -24,18 +24,18 @@ class Album:
         return albums
 
     @classmethod
-    def get_liked_albums(cls):
-        query = "SELECT * FROM albums;"
-        results = connectToMySQL(Album.db).query_db(query)
+    def get_liked_albums(cls,data):
+        query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
+        results =connectToMySQL(cls.db).query_db(query,data)
         albums = []
         for a in results:
             albums.append(cls(a))
         return albums
 
     @classmethod
-    def get_unliked_albums(cls):
-        query = "SELECT * FROM albums;"
-        results = connectToMySQL(Album.db).query_db(query)
+    def get_unliked_albums(cls, data):
+        query = "SELECT * from albums WHERE albums.id NOT IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
+        results = connectToMySQL(Album.db).query_db(query, data)
         albums = []
         for a in results:
             albums.append(cls(a))
