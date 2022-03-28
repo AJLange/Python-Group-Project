@@ -28,8 +28,18 @@ def add_album():
 
 @app.route('/album/<int:id>')
 def display_album(id):
-    this_album = Album.get_one({"id": id})
-    return render_template("dashboard.html", album = this_album)
+    Album.read_album_with_likes({"id": id})
+    return render_template("dashboard.html", album = Album.read_album_with_likes({"id": id}))
+
+@app.route("/albums/like/<int:id>")
+def like_album(id):
+    # Go to db, add album id and user id to like table.
+    data = {
+        "album_id": id,
+        "user_id": session["user_id"]
+    }
+    Album.like_album(data)
+    return redirect("/dashboard") 
 
 # UPDATE
 
