@@ -30,7 +30,7 @@ def add_album():
 def display_album(id):
     Album.get_liked_albums({"id": id})
     Album.get_unliked_albums({"id": id})
-    return render_template("dashboard.html", liked_albums = Album.get_liked_albums({"id": id}), unliked_albums = Album.get_unliked_albums({"id": id}))
+    return render_template("view_album.html", albums = Album.get_liked_albums({"id": id}), unliked_albums = Album.get_unliked_albums({"id": id}))
 
 @app.route("/albums/like/<int:id>")
 def like_album(id):
