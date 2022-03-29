@@ -51,7 +51,7 @@
                 <td>{{ row.favorite_tracks }}</td>
                 <td>
                   <a href="/album/{{row.id}}">View</a>
-                  {% if row.id == session.user_id %}|
+                  {% if row.posted_by == session.user_id %}|
                   <a href="/albums/edit/{{row.id}}">Edit</a> |
                   <a href="/albums/delete/{{row.id}}">Delete</a>
                   {% endif %}
