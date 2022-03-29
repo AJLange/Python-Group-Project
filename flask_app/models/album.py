@@ -32,12 +32,23 @@ class Album:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM albums;"
-        results = connectToMySQL(Album.db).query_db(query)
-        albums = []
-        for a in results:
-            albums.append(cls(a))
-        return albums
+        query = "SELECT * FROM albums JOIN users ON albums.user_id = users.id;"
+        results = connectToMySQL(cls.db).query_db(query)
+        all_albums = []
+        for row in results:
+            user_data = {
+                "id" : row["users.id"],
+                "first_name": row["first_name"],
+                "last_name": row["last_name"],
+                "email": row['email'],
+                "password": row["password"],
+                "created_at": row["users.created_at"],
+                "updated_at": row["users.updated_at"]
+            }
+            this_user = User(user_data)
+            row["user"] = this_user
+            all_albums.append( cls(row) )
+        return all_albums
 
     @classmethod
     def get_one(cls, data):
