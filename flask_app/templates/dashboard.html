@@ -50,8 +50,14 @@
                 <td>{{ row.release_date }}</td>
                 <td>{{ row.favorite_tracks }}</td>
                 <td>
-                  <a href="/edit_album/{{row.id}}">Edit</a> |
-                  <a href="/cancel_album/{{row.id}}">Cancel</a>
+                  <a href="/album/{{row.id}}">View</a>
+                  {% if row.id == session.user_id %}|
+                  <a href="/albums/edit/{{row.id}}">Edit</a> |
+                  <a href="/albums/delete/{{row.id}}">Cancel</a>
+                  {% endif %}
+                  {% if row.id != session.user_id %}|
+                  <a href="/albums/like/{{row.id}}">Like</a>
+                  {% endif %}
                 </td>
               </tr>
               {% endfor %}
