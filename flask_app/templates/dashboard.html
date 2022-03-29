@@ -53,7 +53,7 @@
                   <a href="/album/{{row.id}}">View</a>
                   {% if row.id == session.user_id %}|
                   <a href="/albums/edit/{{row.id}}">Edit</a> |
-                  <a href="/albums/delete/{{row.id}}">Cancel</a>
+                  <a href="/albums/delete/{{row.id}}">Delete</a>
                   {% endif %}
                   {% if row.id != session.user_id %}|
                   <a href="/albums/like/{{row.id}}">Like</a>
