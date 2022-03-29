@@ -84,6 +84,23 @@ class Album:
         return this_album
 
     @classmethod
+    def get_by_id(cls, data):
+        query = "SELECT * FROM albums JOIN users ON albums.user_id = users.id WHERE albums.id = %(id)s;"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        row = results[0]
+        user_data = {
+                "id" : row["users.id"],
+                "first_name": row["first_name"],
+                "last_name": row["last_name"],
+                "email": row['email'],
+                "password": row["password"],
+                "created_at": row["users.created_at"],
+                "updated_at": row["users.updated_at"]
+            }
+        row['user'] = User(user_data)
+        return cls(row)
+
+    @classmethod
     def get_liked_albums(cls, data):
         query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
         results = connectToMySQL(cls.db).query_db(query, data)
