@@ -60,7 +60,6 @@ class User:
             return False
         return cls(result[0])
 
-
     @staticmethod
     def validate_reg(user):
         is_valid = True # we assume this is true
