@@ -26,8 +26,14 @@
       </div>
     </nav>
     <main>
-      <div class="intro">
-        <h2 class="text-primary">{{album.name}}</h2>
+      <div class="container">
+        <div class="text-center mt-5 border border-dark">
+          <h1>Album Title: {{ albums.name }}</h1>
+          <p>Artist: {{ albums.artist }}</p>
+          <p>Released Date: {{ albums.release_date }}</p>
+          <p>Favorite Track: {{albums.favorite_tracks }}</p>
+          <p>Total Likes: <span class="border border-dark">????</span></p>
+        </div>
       </div>
     </main>
     <section>
