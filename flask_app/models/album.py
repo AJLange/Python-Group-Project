@@ -88,6 +88,7 @@ class Album:
             "user_id": User.get_by_id({"id": results[0]["albums.user_id"]})
         }
         print(results)
+        print('here')
         this_album = cls(album_data)
         for row in results:
             user_data = {
