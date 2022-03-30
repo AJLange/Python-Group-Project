@@ -32,8 +32,7 @@ def add_album():
 @app.route('/album/<int:id>')
 def display_album(id):
     Album.get_liked_albums({"id": id})
-    Album.get_unliked_albums({"id": id})
-    return render_template("view_album.html", albums=Album.get_liked_albums({"id": id}), unliked_albums=Album.get_unliked_albums({"id": id}))
+    return render_template("view_album.html", liked_albums = Album.get_liked_albums({"id": id}))
 
 
 @app.route("/albums/like/<int:id>")
@@ -51,9 +50,8 @@ def like_album(id):
 
 @app.route('/albums/edit/<int:id>')
 def edit_album(id):
-    album_to_edit = Album.get_one({"id": id})
-    return render_template("edit_album.html", album=album_to_edit)
-
+    album_to_edit = Album.get_by_id({"id": id})
+    return render_template("edit_album.html", album = album_to_edit)
 
 @app.route('/edit/post', methods=['POST'])
 def update_album():
