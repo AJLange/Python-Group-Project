@@ -61,7 +61,7 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query, data)
         row = results[0]
         user_data = {
-            "id" : row['user.id'],
+            "id" : row['users.id'],
             "first_name": row["first_name"],
             "last_name": row["last_name"],
             "email": row['email'],
@@ -91,7 +91,7 @@ class Album:
         this_album = cls(album_data)
         for row in results:
             user_data = {
-                "id" : row["users.id"],
+                "id": row["users.id"],
                 "first_name": row["first_name"],
                 "last_name": row["last_name"],
                 "email": row['email'],
