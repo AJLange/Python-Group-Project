@@ -45,7 +45,7 @@ def like_album(id):
 
 @app.route('/albums/edit/<int:id>')
 def edit_album(id):
-    album_to_edit = Album.get_one({"id": id})
+    album_to_edit = Album.get_by_id({"id": id})
     return render_template("edit_album.html", album = album_to_edit)
 
 @app.route('/edit/post', methods=['POST'])
