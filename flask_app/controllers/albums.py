@@ -2,9 +2,10 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.album import Album
-from flask import render_template,redirect,request, session
+from flask import render_template, redirect, request, session
 
 # CREATE
+
 
 @app.route("/create/post", methods=['POST'])
 def create_album():
@@ -22,14 +23,17 @@ def create_album():
 
 # READ
 
+
 @app.route('/albums/new')
 def add_album():
     return render_template("create_album.html")
+
 
 @app.route('/album/<int:id>')
 def display_album(id):
     Album.get_liked_albums({"id": id})
     return render_template("view_album.html", liked_albums = Album.get_liked_albums({"id": id}))
+
 
 @app.route("/albums/like/<int:id>")
 def like_album(id):
@@ -39,9 +43,10 @@ def like_album(id):
         "user_id": session["user_id"]
     }
     Album.like_album(data)
-    return redirect("/dashboard") 
+    return redirect("/dashboard")
 
 # UPDATE
+
 
 @app.route('/albums/edit/<int:id>')
 def edit_album(id):
@@ -64,6 +69,7 @@ def update_album():
     return redirect('/dashboard')
 
 # DELETE
+
 
 @app.route('/albums/delete/<int:id>')
 def delete_album(id):
