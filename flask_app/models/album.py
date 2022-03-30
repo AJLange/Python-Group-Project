@@ -102,12 +102,31 @@ class Album:
 
     @classmethod
     def get_liked_albums(cls, data):
-        query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
+        query = "SELECT * FROM likes LEFT JOIN users ON likes.user_id = users.id LEFT JOIN albums ON likes.album_id = albums.id WHERE albums.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
-        albums = []
-        for a in results:
-            albums.append(cls(a))
-        return albums
+        album_data = {
+            "id": results[0]["albums.id"],
+            "name": results[0]["name"],
+            "artist": results[0]["artist"],
+            "release_date": results[0]["release_date"],
+            "favorite_tracks": results[0]["favorite_tracks"],
+            "created_at": results[0]["albums.created_at"],
+            "updated_at": results[0]["albums.updated_at"],
+            "user": User.get_by_id({"id": results[0]["albums.user_id"]})
+        }
+        print(results)
+        this_album = cls(album_data)
+        for row in results:
+            user_data = {
+                "id" : row["users.id"],
+                "username": row["username"],
+                "email": row['email'],
+                "password": row["password"],
+                "created_at": row["created_at"],
+                "updated_at": row["updated_at"]
+            }
+            this_album.liked_by.append(User(user_data))
+        return this_album
 
     @classmethod
     def get_unliked_albums(cls, data):
