@@ -39,7 +39,7 @@ class Album:
     def get_all(cls):
         query = "SELECT * FROM albums JOIN users ON albums.user_id = users.id;"
         results = connectToMySQL(cls.db).query_db(query)
-        all_albums = []
+        albums = []
         for row in results:
             user_data = {
                 "id": row["users.id"],
@@ -52,8 +52,8 @@ class Album:
             }
             this_user = User(user_data)
             row["user"] = this_user
-            all_albums.append(cls(row))
-        return all_albums
+            albums.append(cls(row))
+        return albums
 
     @classmethod
     def get_one(cls, data):
