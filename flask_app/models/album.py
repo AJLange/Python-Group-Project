@@ -40,6 +40,7 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query)
         albums = []
         for row in results:
+            this_album = cls(row)
             user_data = {
                 "id": row["users.id"],
                 "first_name": row["first_name"],
@@ -50,8 +51,8 @@ class Album:
                 "updated_at": row["users.updated_at"]
             }
             this_user = User(user_data)
-            row["user"] = this_user
-            albums.append(cls(row))
+            this_album.user.append(this_user)
+            albums.append(this_album)
         return albums
 
     @classmethod
@@ -60,15 +61,16 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query, data)
         row = results[0]
         user_data = {
-                "id" : row["users.id"],
-                "first_name": row["first_name"],
-                "last_name": row["last_name"],
-                "email": row['email'],
-                "password": row["password"],
-                "created_at": row["users.created_at"],
-                "updated_at": row["users.updated_at"]
-            }
-        row['user'] = User(user_data)
+            "id" : row['user.id'],
+            "first_name": row["first_name"],
+            "last_name": row["last_name"],
+            "email": row['email'],
+            "password": row["password"],
+            "created_at": row["users.created_at"],
+            "updated_at": row["users.updated_at"]
+        }
+        this_user = User(user_data)
+        row['user'] = this_user
         return cls(row)
 
     @classmethod
