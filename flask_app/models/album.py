@@ -74,6 +74,7 @@ class Album:
         return cls(row)
 
     @classmethod
+<<<<<<< HEAD
     def get_liked_albums(cls, data):
         query = "SELECT * FROM likes LEFT JOIN users ON likes.user_id = users.id LEFT JOIN albums ON likes.album_id = albums.id WHERE albums.id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
@@ -90,18 +91,26 @@ class Album:
         print(results)
         print('here')
         this_album = cls(album_data)
+=======
+    def get_liked_albums(cls,data):
+        query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
+        results =connectToMySQL(cls.db).query_db(query,data)
+        albums = []
+>>>>>>> acbcdd857392bff5834ef2de683cb783cff55112
         for row in results:
-            user_data = {
-                "id": row["users.id"],
-                "first_name": row["first_name"],
-                "last_name": row["last_name"],
-                "email": row['email'],
-                "password": row["password"],
-                "created_at": row["created_at"],
-                "updated_at": row["updated_at"]
-            }
-            this_album.liked_by.append(User(user_data))
-        return this_album
+            albums.append(cls(row))
+        print(albums)
+        return albums
+
+    @classmethod
+    def get_unliked_albums(cls,data):
+        query = "SELECT * from albums WHERE albums.id NOT IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
+        results =connectToMySQL(cls.db).query_db(query,data)
+        albums = []
+        for row in results:
+            albums.append(cls(row))
+        print(albums)
+        return albums
 
     @classmethod
     def like_album(cls, data):

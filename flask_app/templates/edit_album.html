@@ -47,12 +47,13 @@
         <!--  -->
         {% endwith %}
         <div>
+          <input type="hidden" value="{{album.id}}" name="id">
           <label for="name">Album Name:</label>
           <input
             type="text"
             class="form-control"
             name="name"
-            value="{{albums.name}}"
+            value="{{album.name}}"
           />
         </div>
         <div>
@@ -61,7 +62,7 @@
             type="text"
             class="form-control"
             name="artist"
-            value="{{albums.artist}}"
+            value="{{album.artist}}"
           />
         </div>
         <label for="release_date">Release Date:</label>
@@ -70,7 +71,7 @@
           class="form-control"
           placeholder="mm-dd-yyyy"
           name="release_date"
-          value="{{albums.release_date}}"
+          value="{{album.release_date}}"
         />
         <div>
           <label for="favorite_tracks">Favorite Tracks:</label>
@@ -79,8 +80,7 @@
             cols="25"
             rows="10"
             class="form-control"
-            value="{{albums.favorite_tracks}}"
-          ></textarea>
+          >{{album.favorite_tracks}}</textarea>
         </div>
         <div>
           <button class="btn btn-primary mt-3">Submit</button>
