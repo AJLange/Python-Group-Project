@@ -17,7 +17,7 @@ class Album:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.liked_by = []
-        self.user = data['user']
+        self.user = []
 
     @classmethod
     def save(cls, data):
@@ -83,7 +83,7 @@ class Album:
             "favorite_tracks": results[0]["favorite_tracks"],
             "created_at": results[0]["albums.created_at"],
             "updated_at": results[0]["albums.updated_at"],
-            "user": User.get_by_id({"id": results[0]["albums.user_id"]})
+            "user_id": User.get_by_id({"id": results[0]["albums.user_id"]})
         }
         print(results)
         this_album = cls(album_data)
