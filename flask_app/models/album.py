@@ -18,7 +18,6 @@ class Album:
         self.updated_at = data['updated_at']
         self.liked_by = []
         self.posted_by = []
-        self.user = []
 
     @classmethod
     def save(cls, data):
@@ -90,14 +89,14 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query, data)
         row = results[0]
         user_data = {
-                "id" : row["users.id"],
-                "first_name": row["first_name"],
-                "last_name": row["last_name"],
-                "email": row['email'],
-                "password": row["password"],
-                "created_at": row["users.created_at"],
-                "updated_at": row["users.updated_at"]
-            }
+            "id": row["users.id"],
+            "first_name": row["first_name"],
+            "last_name": row["last_name"],
+            "email": row['email'],
+            "password": row["password"],
+            "created_at": row["users.created_at"],
+            "updated_at": row["users.updated_at"]
+        }
         row['user'] = User(user_data)
         return cls(row)
 
@@ -113,13 +112,13 @@ class Album:
             "favorite_tracks": results[0]["favorite_tracks"],
             "created_at": results[0]["albums.created_at"],
             "updated_at": results[0]["albums.updated_at"],
-            "user": User.get_by_id({"id": results[0]["albums.user_id"]})
+            "user_id": User.get_by_id({"id": results[0]["albums.user_id"]})
         }
         print(results)
         this_album = cls(album_data)
         for row in results:
             user_data = {
-                "id" : row["users.id"],
+                "id": row["users.id"],
                 "first_name": row["first_name"],
                 "last_name": row["last_name"],
                 "email": row['email'],
