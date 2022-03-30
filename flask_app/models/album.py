@@ -18,6 +18,7 @@ class Album:
         self.updated_at = data['updated_at']
         self.liked_by = []
         self.posted_by = []
+        self.user = []
 
     @classmethod
     def save(cls, data):
