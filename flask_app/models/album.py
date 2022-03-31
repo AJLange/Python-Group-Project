@@ -19,7 +19,7 @@ class Album:
         self.updated_at = data['updated_at']
         self.liked_by = []
         self.user = []
-        self.tot_likes = []
+        self.count = []
 
     @classmethod
     def save(cls, data):
@@ -90,7 +90,8 @@ class Album:
         query = "SELECT count(album_id) from likes WHERE album_id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
         count = results
-        return count
+        print(count)
+        return count[0]['count(album_id)']
 
     @classmethod
     def get_unliked_albums(cls, data):
