@@ -61,7 +61,7 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query, data)
         row = results[0]
         user_data = {
-            "id" : row['users.id'],
+            "id": row['users.id'],
             "first_name": row["first_name"],
             "last_name": row["last_name"],
             "email": row['email'],
@@ -76,7 +76,7 @@ class Album:
     @classmethod
     def get_liked_albums(cls,data):
         query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
-        results =connectToMySQL(cls.db).query_db(query,data)
+        results = connectToMySQL(cls.db).query_db(query, data)
         albums = []
         for row in results:
             albums.append(cls(row))
@@ -84,9 +84,16 @@ class Album:
         return albums
 
     @classmethod
-    def get_unliked_albums(cls,data):
+    def get_liked_count(cls, data):
+        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s );"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        count = results
+        return count
+
+    @classmethod
+    def get_unliked_albums(cls, data):
         query = "SELECT * from albums WHERE albums.id NOT IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
-        results =connectToMySQL(cls.db).query_db(query,data)
+        results = connectToMySQL(cls.db).query_db(query, data)
         albums = []
         for row in results:
             albums.append(cls(row))
@@ -98,7 +105,6 @@ class Album:
         query = "INSERT INTO likes (user_id,album_id) VALUES (%(user_id)s,%(album_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
- 
     @staticmethod
     def validate_album(album):
         is_valid = True
