@@ -87,7 +87,7 @@ class Album:
 
     @classmethod
     def get_liked_count(cls, data):
-        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s );"
+        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
         count = results
         return count
