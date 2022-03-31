@@ -27,15 +27,13 @@
     </nav>
     <main>
       <div class="container" style="height: 600px;">
-      {% for album in albums %}
         <div class="text-center mt-5 border border-dark">
           <h1>Album Title: {{ album.name }}</h1>
           <p>Artist: {{ album.artist }}</p>
           <p>Released Date: {{ album.release_date }}</p>
           <p>Favorite Track: {{ album.favorite_tracks }}</p>
-          <p>Total Likes: <span class="border border-dark">{{ album.count }}</span></p>
+          <p>Total Likes: <span class="border border-dark">{{ count }}</span></p>
         </div>
-      {% endfor %}
     </main>
     <section>
 
