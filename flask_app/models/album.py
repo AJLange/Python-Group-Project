@@ -1,3 +1,4 @@
+from itertools import count
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import app
 from flask_app.models.user import User
@@ -86,10 +87,10 @@ class Album:
 
     @classmethod
     def get_liked_count(cls, data):
-        query = "SELECT count(album_id) from likes WHERE album_id as tot_likes = %(id)s );"
+        query = "SELECT count(album_id) as tot_likes from likes WHERE album_id = %(id)s );"
         results = connectToMySQL(cls.db).query_db(query, data)
-        count = results
-        return count
+        #count = results
+        return results
 
     @classmethod
     def get_unliked_albums(cls, data):
