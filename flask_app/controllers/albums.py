@@ -1,3 +1,4 @@
+from itertools import count
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import app
 from flask_app.models.user import User
@@ -34,7 +35,7 @@ def display_album(id):
     data = {
         "id": id,
     }
-    return render_template("view_album.html", album=Album.get_by_id(data), tot_likes=Album.get_liked_count(data))
+    return render_template("view_album.html", album=Album.get_by_id(data), count=Album.get_liked_count(data))
 
 
 @app.route("/albums/like/<int:id>")
