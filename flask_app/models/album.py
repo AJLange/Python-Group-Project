@@ -18,6 +18,7 @@ class Album:
         self.updated_at = data['updated_at']
         self.liked_by = []
         self.user = []
+        self.tot_likes = []
 
     @classmethod
     def save(cls, data):
@@ -85,7 +86,7 @@ class Album:
 
     @classmethod
     def get_liked_count(cls, data):
-        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s );"
+        query = "SELECT count(album_id) as tot.likes from likes WHERE album_id = %(id)s );"
         results = connectToMySQL(cls.db).query_db(query, data)
         count = results
         return count
