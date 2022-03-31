@@ -61,7 +61,7 @@ class Album:
         results = connectToMySQL(cls.db).query_db(query, data)
         row = results[0]
         user_data = {
-            "id" : row['users.id'],
+            "id": row['users.id'],
             "first_name": row["first_name"],
             "last_name": row["last_name"],
             "email": row['email'],
@@ -74,38 +74,26 @@ class Album:
         return cls(row)
 
     @classmethod
-<<<<<<< HEAD
     def get_liked_albums(cls, data):
-        query = "SELECT * FROM likes LEFT JOIN users ON likes.user_id = users.id LEFT JOIN albums ON likes.album_id = albums.id WHERE albums.id = %(id)s;"
-        results = connectToMySQL(cls.db).query_db(query, data)
-        album_data = {
-            "id": results[0]["albums.id"],
-            "name": results[0]["name"],
-            "artist": results[0]["artist"],
-            "release_date": results[0]["release_date"],
-            "favorite_tracks": results[0]["favorite_tracks"],
-            "created_at": results[0]["albums.created_at"],
-            "updated_at": results[0]["albums.updated_at"],
-            "user_id": User.get_by_id({"id": results[0]["albums.user_id"]})
-        }
-        print(results)
-        print('here')
-        this_album = cls(album_data)
-=======
-    def get_liked_albums(cls,data):
         query = "SELECT * from albums WHERE albums.id IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
-        results =connectToMySQL(cls.db).query_db(query,data)
+        results = connectToMySQL(cls.db).query_db(query, data)
         albums = []
->>>>>>> acbcdd857392bff5834ef2de683cb783cff55112
         for row in results:
             albums.append(cls(row))
         print(albums)
         return albums
 
     @classmethod
-    def get_unliked_albums(cls,data):
+    def get_liked_count(cls, data):
+        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s );"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        count = results
+        return count
+
+    @classmethod
+    def get_unliked_albums(cls, data):
         query = "SELECT * from albums WHERE albums.id NOT IN (SELECT album_id FROM likes WHERE user_id = %(id)s );"
-        results =connectToMySQL(cls.db).query_db(query,data)
+        results = connectToMySQL(cls.db).query_db(query, data)
         albums = []
         for row in results:
             albums.append(cls(row))
@@ -117,7 +105,6 @@ class Album:
         query = "INSERT INTO likes (user_id,album_id) VALUES (%(user_id)s,%(album_id)s);"
         return connectToMySQL(cls.db).query_db(query, data)
 
- 
     @staticmethod
     def validate_album(album):
         is_valid = True
