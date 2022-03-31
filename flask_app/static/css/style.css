@@ -23,3 +23,7 @@
 .title, .register-link, .login-link  {
     color:darkred;
 }
+
+.container-md {
+    background-image: linear-gradient(yellow,red );
+}
