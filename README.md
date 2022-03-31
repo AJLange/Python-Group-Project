@@ -6,9 +6,9 @@ Project: *MyFavoriteAlbums*
 Group Members:
 
 * Julie Crotzer: ERD, Wireframe, Albums.py, HTML
-* Amanda Lange: Repo Maintenence and User/Login
+* Amanda Lange: Repo Maintenence, Bug fixing, User/Login Backend
 * Sue Yang: Front End/Bootstrap
-* Kai Kennedy: Front End HTML
+* Kai Kennedy: Backend for Albums sorting
 
 MVP Features: 
 
