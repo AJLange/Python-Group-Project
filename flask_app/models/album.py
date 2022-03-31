@@ -90,7 +90,6 @@ class Album:
         query = "SELECT count(album_id) from likes WHERE album_id = %(id)s;"
         results = connectToMySQL(cls.db).query_db(query, data)
         count = results
-        print(count)
         return count[0]['count(album_id)']
 
     @classmethod
