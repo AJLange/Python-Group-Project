@@ -13,7 +13,7 @@
 
 <body>
   <div class="container-md">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img class="music" src="{{ url_for('static', filename='img/music.jpg') }}">
@@ -49,14 +49,14 @@
                 <td>{{ row.artist }}</td>
                 <td>{{ row.release_date }}</td>
                 <td>{{ row.favorite_tracks }}</td>
-                <td>
-                  <a href="/album/{{row.id}}">View</a>
+                <td class="links">
+                  <a href="/album/{{row.id}}" class="link-success">View</a>
                   {% if row.user_id == session.user_id %}|
-                  <a href="/albums/edit/{{row.id}}">Edit</a> |
-                  <a href="/albums/delete/{{row.id}}">Delete</a>
+                  <a href="/albums/edit/{{row.id}}" class="link-success">Edit</a> |
+                  <a href="/albums/delete/{{row.id}}" class="link-success">Delete</a>
                   {% endif %}
                   {% if row.user_id != session.user_id %}|
-                  <a href="/albums/like/{{row.id}}">Like</a>
+                  <a href="/albums/like/{{row.id}}" class="link-success">Like</a>
                   {% endif %}
                 </td>
               </tr>
