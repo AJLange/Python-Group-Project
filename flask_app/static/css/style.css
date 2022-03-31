@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+.record-pic {
+    height: 100%;
+    width: 100%;
+    background-image: cover;
+
+}
+
 .intro {
     text-align: center;
     margin-top: 20px;
