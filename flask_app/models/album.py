@@ -87,10 +87,10 @@ class Album:
 
     @classmethod
     def get_liked_count(cls, data):
-        query = "SELECT count(album_id) as tot_likes from likes WHERE album_id = %(id)s );"
+        query = "SELECT count(album_id) from likes WHERE album_id = %(id)s );"
         results = connectToMySQL(cls.db).query_db(query, data)
-        #count = results
-        return results
+        count = results
+        return count
 
     @classmethod
     def get_unliked_albums(cls, data):
